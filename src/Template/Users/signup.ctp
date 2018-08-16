@@ -30,7 +30,7 @@
     <div class="form-group">
         <label class="normal">
             <input type="checkbox" name="chkAccept" id="chkAccept" />
-            <?php echo __('Tôi đã đọc và đồng ý với điều khoản sử dụng tại TADIEX'); ?>
+            <?php echo __('Tôi đã đọc và đồng ý với điều khoản sử dụng tại AdScript'); ?>
         </label>
     </div>
     <div class="submit_section">

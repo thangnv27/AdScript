@@ -54,6 +54,8 @@ class PagesController extends AppController
         
         switch ($page) {
             case "home":
+                $this->redirect(["controller" => "Dashboard", "action" => "index"]);
+                
                 // SEO
                 $title = __('Trao đổi mua bán WEX');
                 $meta_description = __('mô tả trang web');
@@ -61,34 +63,7 @@ class PagesController extends AppController
                 $og_image = SITE_URL . '/img/frontend/logo.png';
                 
                 // Data
-                $offers_table = TableRegistry::get('offers');
-                $querySell = $offers_table->find('all', array(
-                    'conditions' => array(
-                        'offer_type' => 'sell',
-                        'status' => 1,
-                    )
-                ))->contain(['Users']);
-                $offersSell = $this->paginate($querySell, [
-                    'limit' => 10,
-                    'order' => [
-                        'Offers.price' => 'asc'
-                    ]
-                ]);
-                $queryBuy = $offers_table->find('all', array(
-                    'conditions' => array(
-                        'offer_type' => 'buy',
-                        'status' => 1,
-                    )
-                ))->contain(['Users']);
-                $offersBuy = $this->paginate($queryBuy, [
-                    'limit' => 10,
-                    'order' => [
-                        'Offers.price' => 'desc'
-                    ]
-                ]);
                 
-                $this->set('offersSell', $offersSell);
-                $this->set('offersBuy', $offersBuy);
                 break;
             default:
                 break;

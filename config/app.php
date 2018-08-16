@@ -203,7 +203,7 @@ return [
     'Email' => [
         'default' => [
             'transport' => 'default',
-            'from' => ['tadiex@gmail.com' => 'TADIEX'],
+            'from' => ['ppo.global@gmail.com' => 'AdScript'],
             //'charset' => 'utf-8',
             //'headerCharset' => 'utf-8',
         ],
@@ -229,9 +229,9 @@ return [
              * the following line and set the port accordingly
              */
             //'port' => 'non_standard_port_number',
-            'username' => 'root',
-            'password' => '',
-            'database' => 'tadiex',
+            'username' => 'adscript_user',
+            'password' => '1JCo5KiY8A',
+            'database' => 'adscript_adscript',
             'encoding' => 'utf8',
             'timezone' => 'UTC',
             'flags' => [],

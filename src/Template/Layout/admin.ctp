@@ -9,7 +9,10 @@ $controller = strtolower($this->request->params['controller']);
 <head>
     <?= $this->Html->charset() ?>
     <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" />
-    <title><?= $title ?> - TADIEX ADMINISTRATOR</title>
+    <title><?= $title ?> - AdScript Administrator</title>
+    <meta name="robots" content="noindex, nofollow" /> 
+    <meta name="googlebot" content="noindex, nofollow" />
+    <meta name="bingbot" content="noindex, nofollow" />
     <?= $this->Html->meta('icon') ?>
 
     <?= $this->Html->css('bootstrap.min.css') ?>
@@ -164,7 +167,7 @@ $controller = strtolower($this->request->params['controller']);
     <!--BEGIN: FOOTER-->
     <div class="footer">
         <div class="container">
-            <span>&COPY; 2018. CMS được phát triển bởi <a href="//tadiex.com/">TADIEX</a></span>
+            <span>&COPY; 2018. CMS được phát triển bởi <a href="//adscript.net/">AdScript</a></span>
         </div>
     </div>
     <!--END: FOOTER-->

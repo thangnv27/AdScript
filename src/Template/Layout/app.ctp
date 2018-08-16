@@ -8,7 +8,10 @@ $pass = $this->request->params['pass'];
 <head>
 <?= $this->Html->charset() ?>
 <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" />
-<title><?= $title ?> - TADIEX</title>
+<title><?= $title ?> - AdScript</title>
+<meta name="robots" content="noindex, nofollow" /> 
+<meta name="googlebot" content="noindex, nofollow" />
+<meta name="bingbot" content="noindex, nofollow" />
 <?= $this->Html->meta('icon') ?>
 
 <?= $this->Html->css('bootstrap.min.css') ?>

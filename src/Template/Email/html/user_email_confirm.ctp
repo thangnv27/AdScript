@@ -4,4 +4,4 @@
 <p><a href="<?= $link ?>"><?= $link ?></a></p>
 <br/>
 <p>Trân trọng,</p>
-TADIEX
+AdScript

@@ -12,11 +12,11 @@ $pass = $this->request->params['pass'];
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <?= $this->Html->charset() ?>
 <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" />
-<title><?= $title ?> - TADIEX</title>
+<title><?= $title ?> - AdScript</title>
 <meta name="keywords" content="" />
 <meta name="description" content="<?=$meta_description?>" />
-<meta name="author" content="TADIEX" />
-<meta name="generator" content="Ngô Thắng" />
+<meta name="author" content="AdScript.Net" />
+<meta name="generator" content="AdScript.Net" />
 <meta name="robots" content="index, follow" /> 
 <meta name="googlebot" content="index, follow" />
 <meta name="bingbot" content="index, follow" />
@@ -70,102 +70,76 @@ $pass = $this->request->params['pass'];
 <!--BEGIN: DESKTOP HEADER-->
 <header id="desktop-header">
     <div class="top-header">
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-6">
-                    <ul class="top-header-left">
-                        <li>
-                            <a href="#">
-                                <?= $this->Html->image('frontend/view-list-alt.png', ['alt' => 'Tin tức']) ?>
-                                Tin tức
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <?= $this->Html->image('frontend/settings.png', ['alt' => 'Cài đặt']) ?>
-                                Cài đặt
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <?= $this->Html->image('frontend/download.png', ['alt' => 'Tải về']) ?>
-                                Tải về ứng dụng
-                            </a>
+        <nav class="navbar navbar-default">
+            <div class="container">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="<?=SITE_URL?>">AdScript</a>
+                </div>
+
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav">
+                        <li><a href="<?=$this->Url->build(['controller' => 'Ads', 'action' => 'add'])?>">Add New</a></li>
+                        <li><a href="#">Link</a></li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">Action</a></li>
+                                <li><a href="#">Another action</a></li>
+                                <li><a href="#">Something else here</a></li>
+                                <li role="separator" class="divider"></li>
+                                <li><a href="#">Separated link</a></li>
+                                <li role="separator" class="divider"></li>
+                                <li><a href="#">One more separated link</a></li>
+                            </ul>
                         </li>
                     </ul>
-                </div>
-                <div class="col-sm-6 text-right">
-                    <ul class="user-login">
+<!--                        <form class="navbar-form navbar-left">
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Search">
+                        </div>
+                        <button type="submit" class="btn btn-default">Search</button>
+                    </form>-->
+                    <ul class="nav navbar-nav navbar-right">
                         <?php if ($this->request->session()->read('Auth.User.username')): ?>
-                        <li class="avatar">
-                            <a href="<?=$this->Url->build(['controller' => 'Users', 'action' => 'editProfile'])?>">
-                                <?= $this->Html->image('frontend/avatar.png', ['alt' => 'duongnt9x']) ?>
-                                <?= $this->request->session()->read('Auth.User.username') ?>
-                            </a>
-                        </li>
-                        <li class="logout">
-                            <a href="<?=$this->Url->build(['controller' => 'Users', 'action' => 'logout'])?>"
-                               onclick="return confirm('Bạn có chắc chắn muốn Đăng xuất không?')">
-                                <span class="fa fa-angle-right"></span>
-                                Đăng xuất
-                            </a>
+                        <li class="dropdown">
+                            <a href="javascript://" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                <?= $this->request->session()->read('Auth.User.username') ?> <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="<?=$this->Url->build(['controller' => 'Users', 'action' => 'editProfile'])?>">
+                                       <span class="fa fa-user-circle-o"></span> Your Profile</a></li>
+                                <li><a href="#">
+                                       <span class="fa fa-key"></span> Change Password</a></li>
+                                <li role="separator" class="divider"></li>
+                                <li><a href="<?=$this->Url->build(['controller' => 'Users', 'action' => 'logout'])?>" 
+                                       onclick="return confirm('Are you sure want to log out?')">
+                                       <span class="fa fa-sign-out"></span> Log out</a></li>
+                            </ul>
                         </li>
                         <?php else: ?>
-                        <li class="avatar">
-                            <a href="javascript://" data-toggle="modal" data-target="#loginModal">
-                                <?= $this->Html->image('frontend/user-default.png', ['alt' => 'User']) ?>
-                            </a>
-                        </li>
                         <li class="login">
                             <a href="javascript://" data-toggle="modal" data-target="#loginModal">
-                                Đăng nhập
+                                Log in
                             </a>
                         </li>
                         <li class="signup">
                             <a href="javascript://" data-toggle="modal" data-target="#signupModal">
                                 <span class="fa fa-angle-right"></span>
-                                Đăng ký
+                                Sign up
                             </a>
                         </li>
                         <?php endif; ?>
                     </ul>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="content-header">
-        <div class="container">
-            <div class="pull-left">
-                <div class="logo">
-                    <a rel="home" title="Trao đổi, mua bán wex" href="<?=SITE_URL?>">
-                        <?= $this->Html->image('frontend/logo.png', ['itemprop' => 'logo', 'alt' => 'TADIEX']) ?>
-                    </a>
-                </div>
-            </div>
-            <div class="pull-right">
-                <ul class="menu">
-                    <li class="<?php echo ( (strpos($controller, "pages") !== false) or (strpos($controller, "offers") !== false and $action == "trade") )?"actived":"" ?>"><a href="<?=SITE_URL?>">Mua bán wex</a></li>
-                    <li class="<?php echo (strpos($controller, "dashboard") !== false)?"actived":"" ?>"><a href="<?=$this->Url->build(['controller' => 'Dashboard', 'action' => 'index'])?>">Bảng điều khiển</a></li>
-                    <?php if ($this->request->session()->read('Auth.User.wallet')): ?>
-                    <li><a href="#" class="wallet wallet-usd">Ví USD
-                            <span class="blance">
-                                <?php echo number_format($this->request->session()->read('Auth.User.wallet.usd'), 2);?>
-                            </span>
-                        </a>
-                    </li>
-                    <li><a href="#" class="wallet wallet-vnd">Ví VNĐ
-                            <span class="blance">
-                                <?php echo number_format($this->request->session()->read('Auth.User.wallet.vnd'), 2);?>
-                            </span>
-                        </a>
-                    </li>
-                    <?php else: ?>
-                    <li><a href="#" class="wallet wallet-usd">Ví USD<span class="blance">0.00</span></a></li>
-                    <li><a href="#" class="wallet wallet-vnd">Ví VNĐ<span class="blance">0.00</span></a></li>
-                    <?php endif; ?>
-                </ul>
-            </div>
-        </div>
+                </div><!-- /.navbar-collapse -->
+            </div><!-- /.container-fluid -->
+        </nav>
     </div>
 </header>
 <!--END: DESKTOP HEADER-->
@@ -196,16 +170,16 @@ $pass = $this->request->params['pass'];
     </div>
 
     <nav id="menu-4" class="st-menu st-effect-4">
-        <form method="get" action="/search/" id="search_mini_form">
+<!--        <form method="get" action="/search/" id="search_mini_form">
             <div class="form-search">
                 <div class="searchcontainer"><span class="glyphicon glyphicon-search" aria-hidden="true"></span>
                     <input type="text" maxlength="128" class="input-text" value="" name="s" id="search" />
                 </div>
             </div>
-        </form>
+        </form>-->
 
         <ul class="nav">
-            <li><a href="<?=SITE_URL?>">Mua Bán WEX</a></li>
+            <!--<li><a href="<?=SITE_URL?>">AdScript</a></li>-->
             <li><a href="<?=$this->Url->build(['controller' => 'Dashboard', 'action' => 'index'])?>">Bảng điều khiển</a></li>
         </ul>
     </nav>
@@ -224,14 +198,14 @@ $pass = $this->request->params['pass'];
 
 <!--BEGIN: FOOTER-->
 <section id="footer">
-    <div class="footer1">
+    <!--<div class="footer1">
         <div class="container">
             <div class="row">
                 <div class="col-md-3">
                     <h3 class="widget-title">Thông tin liên hệ</h3>
                     <div class="address"><span>Địa chỉ:</span> 249/115 Hà Huy Tập</div>
                     <div class="phone"><span>Điện Thoại:</span> 91 999 999 999</div>
-                    <div class="email"><span>Email:</span> tadiex@gmail.com</div>
+                    <div class="email"><span>Email:</span> adscript@gmail.com</div>
                     <div class="social">
                         <?= $this->Html->image('frontend/facebook.png', ['alt' => 'Facebook', 'class' => 'facebook']) ?>
                         <?= $this->Html->image('frontend/twitter.png', ['alt' => 'Twitter', 'class' => 'twitter']) ?>
@@ -294,9 +268,9 @@ $pass = $this->request->params['pass'];
                 </div>
             </div>
         </div>
-    </div>
+    </div>-->
     <div class="footer2">
-        Copyright &copy; TADIEX. All rights reserved.
+        Copyright &copy; AdScript.Net. All rights reserved.
     </div>
 </section>
 <!--END: FOOTER-->
@@ -378,7 +352,7 @@ $pass = $this->request->params['pass'];
                     <div class="form-group">
                         <label class="normal">
                             <input type="checkbox" name="chkAccept" id="chkAccept" />
-                            <?php echo __('Tôi đã đọc và đồng ý với điều khoản sử dụng tại TADIEX'); ?>
+                            <?php echo __('Tôi đã đọc và đồng ý với điều khoản sử dụng tại AdScript'); ?>
                         </label>
                     </div>
                     <div class="submit_section">

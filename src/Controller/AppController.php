@@ -43,13 +43,15 @@ class AppController extends Controller {
             $this->loadComponent('Auth', [
                 'loginAction' => ['prefix' => 'admin', 'controller' => 'Users', 'action' => 'login'],
                 'loginRedirect' => ['prefix' => false, 'controller' => 'Admins', 'action' => 'display', 'index'],
-                'logoutRedirect' => ['prefix' => false, 'controller' => 'Pages', 'action' => 'display', 'home']
+                'logoutRedirect' => ['prefix' => false, 'controller' => 'Users', 'action' => 'login']
+//                'logoutRedirect' => ['prefix' => false, 'controller' => 'Pages', 'action' => 'display', 'home']
             ]);
         } else {
             $this->loadComponent('Auth', [
                 'loginAction' => ['prefix' => false, 'controller' => 'Users', 'action' => 'login'],
                 'loginRedirect' => ['prefix' => false, 'controller' => 'Dashboard', 'action' => 'index'],
-                'logoutRedirect' => ['prefix' => false, 'controller' => 'Pages', 'action' => 'display', 'home']
+                'logoutRedirect' => ['prefix' => false, 'controller' => 'Users', 'action' => 'login']
+//                'logoutRedirect' => ['prefix' => false, 'controller' => 'Pages', 'action' => 'display', 'home']
             ]);
         }
 

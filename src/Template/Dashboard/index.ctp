@@ -12,19 +12,10 @@ if (!Configure::read('debug')):
     throw new NotFoundException('Please replace src/Template/Dashboard/index.ctp with your own version.');
 endif;
 ?>
-<div class="slide-header pdt41">
-</div><!--/.slide-header-->
-
-<?= $this->element('notification') ?>
 
 <div class="main-content">
     <div class="container">
-        <?= $this->element('dashboard-nav-list') ?>
         
-        <div class="dashboard-content">
-            <h1>Giao dịch đang mở</h1>
-            <p>Chưa có giao dịch nào</p>
-        </div>
     </div>
 </div>
 

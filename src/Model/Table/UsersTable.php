@@ -12,7 +12,6 @@ class UsersTable extends Table {
         $this->primaryKey('id');
         $this->hasOne('Wallets');
         $this->hasOne('UserMeta');
-        $this->hasMany('Trades');
         $this->hasMany('LogLogin');
     }
 

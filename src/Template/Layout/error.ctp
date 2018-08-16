@@ -2,9 +2,10 @@
 <html>
 <head>
     <?= $this->Html->charset() ?>
-    <title>
-        <?= $this->fetch('title') ?>
-    </title>
+    <title><?= $this->fetch('title') ?> - AdScript</title>
+    <meta name="robots" content="noindex, nofollow" /> 
+    <meta name="googlebot" content="noindex, nofollow" />
+    <meta name="bingbot" content="noindex, nofollow" />
     <?= $this->Html->meta('icon') ?>
 
     <?= $this->Html->css('base.css') ?>

@@ -187,7 +187,7 @@ jQuery(document).ready(function ($) {
         var _form = this;
         var _action = jQuery(this).attr('action');
         if(!jQuery("#chkAccept").is(":checked")){
-            jQuery("#signup_result").html('<p>Bạn cần phải đọc và đồng ý với điều khoản sử dụng tại TADIEX!</p>');
+            jQuery("#signup_result").html('<p>Bạn cần phải đọc và đồng ý với điều khoản sử dụng tại AdScript!</p>');
         } else {
             jQuery("#signup_result").html('<p>Đang gửi...</p>');
             jQuery("#btnSignup").attr('disabled', 'disabled');

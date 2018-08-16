@@ -50,171 +50,11 @@ table, .table {max-width: 100%!important}
     padding: 0;
 }
 
-.user-login .avatar img{
-    width: 42px;
-    height: 42px;
-    border-radius: 50%;
-}
-.user-login .logout, .user-login .signup {
-    border-left: 1px solid #f5ad09;
-    padding-left: 2px;
-    margin-left: 10px;
-}
-
-.user-login .logout a, .user-login .signup a, .user-login .login a {
-    color: #f5ad09;
-}
-
 #loginModal .modal-dialog, #signupModal .modal-dialog{
     max-width: 410px
 }
 #login_form label{
     display: block
-}
-
-#desktop-header {
-    position: absolute;
-    width: 100%;
-}
-
-#desktop-header .top-header ul.top-header-left {
-    margin-top: 16px !important;
-}
-
-#desktop-header .top-header ul.user-login {
-    margin-top: 5px !important;
-}
-
-#desktop-header .top-header ul.top-header-left, #desktop-header .top-header ul.user-login {
-    padding: 0;
-    margin: 0;
-}
-
-#desktop-header .top-header ul.top-header-left li {
-    margin-right: 40px;
-}
-
-#desktop-header .top-header ul.top-header-left li,
-#desktop-header .top-header ul.user-login li {
-    list-style: none;
-    display: inline-block;
-}
-
-#desktop-header .top-header {
-    background: #fff;
-    height: 50px;
-}
-
-#desktop-header .content-header {
-    background: url('../img/frontend/bg-content-header.png');
-    background-repeat: no-repeat;
-    background-size: cover;
-}
-
-#desktop-header .content-header .logo {
-    margin-top: 22px;
-}
-
-#desktop-header .content-header ul {
-    padding: 0;
-    margin: 0;
-}
-
-#desktop-header .content-header ul li {
-    display: inline-block;
-    float: left;
-    text-align: center
-}
-
-#desktop-header .content-header ul li a {
-    text-transform: uppercase;
-    color: #252774;
-    font-size: 16px;
-    font-weight: bold;
-    text-decoration: none;
-    padding: 35px 15px 30px 15px;
-    display: block;
-}
-
-#desktop-header .content-header ul.menu li:hover, #desktop-header .content-header ul.menu li.actived {
-    background: url('../img/frontend/bg-hover-menu.png');
-    border-bottom: 4px solid #faa72d;
-}
-#desktop-header .content-header ul.menu li .wallet {
-    padding: 17px 15px
-}
-#desktop-header .content-header ul.menu li .wallet .blance{
-    display: block;
-    font-weight: 300;
-    font-size: 22px
-}
-
-.slide-header {
-    padding-top: 240px;
-    padding-bottom: 100px;
-    background: url(../img/frontend/bg-header.png) no-repeat top center;
-    background-size: cover
-}
-
-.slide-header .title-slide {
-    font-size: 48px;
-    text-transform: uppercase;
-    color: #faa72d;
-    font-weight: 800;
-    font-family: "Open Sans", sans-serif;
-    margin-bottom: 10px;
-}
-
-.slide-header .title-slide-child {
-    color: #fff;
-    font-size: 36px;
-    font-weight: 300;
-    font-family: "Open Sans", sans-serif;
-    margin-bottom: 68px;
-}
-
-.slide-header .detail-price-buy p.price-buy {
-    font-size: 16px;
-    color: #f5ad09;
-    text-transform: uppercase;
-    font-family: "Open Sans", sans-serif;
-    font-weight: bold;
-}
-
-.slide-header .detail-price-buy p.price {
-    font-size: 26px;
-    font-weight: lighter;
-    font-family: "Open Sans", sans-serif;
-    color: #fff;
-    margin-bottom: 25px
-}
-
-.slide-header .detail-price-buy a.btn-now-1,
-.slide-header .detail-price-buy a.btn-now-2 {
-    text-transform: uppercase;
-    border: 1px solid #f9a72d;
-    display: block;
-    padding: 8px 16px;
-    border-radius: 5px;
-    text-decoration: none;
-    margin: 0 25px;
-}
-
-.slide-header .detail-price-buy a.btn-now-1 {
-    color: #f9a72d;
-}
-.slide-header .detail-price-buy a.btn-now-1:hover {
-    color: #fff;
-    background: #252774;
-    border-color: #252774
-}
-.slide-header .detail-price-buy a.btn-now-2 {
-    color: #fff;
-    background: #f9a72d;
-}
-.slide-header .detail-price-buy a.btn-now-2:hover {
-    background: #252774;
-    border-color: #252774
 }
 
 .message{
@@ -300,9 +140,7 @@ table, .table {max-width: 100%!important}
     bottom: 20px;
 }
 
-body.notice .container, body.app .container{
-    max-width: 750px
-}
+body.notice .container{max-width: 750px}
 body.notice #content{
     background: #fff;
     padding: 25px;
@@ -311,6 +149,7 @@ body.notice #content{
     -moz-box-shadow: 0 0 30px rgba(0, 0, 0, 0.2);
     box-shadow: 0 0 30px rgba(0, 0, 0, 0.2);
 }
+body.app .container{max-width: 450px}
 body.app #content{
     background: #fff;
     padding: 25px;
@@ -322,270 +161,35 @@ body.app .message{
     margin-top: 0
 }
 
-.main-content .list-user-sell, .main-content .list-user-buy {
-    position: relative;
-    overflow: hidden;
-    margin-bottom: 36px;
-    margin-top: 15px;
-}
-
-.main-content .list-user-sell .text-user-sell, .main-content .list-user-buy .text-user-buy {
-    font-size: 24px;
-    text-transform: uppercase;
-    margin: 0;
-    padding-left: 35px
-}
-.main-content .list-user-sell .text-user-sell {
-    color: #252774;
-    background: url(../img/frontend/user-sell.png) no-repeat
-}
-
-.main-content .list-user-buy .text-user-buy {
-    color: #faa72d;
-    background: url(../img/frontend/user-buy.png) no-repeat
-}
-
-.main-content .arrow-left {
-    position: absolute;
-    right: 50px;
-    bottom: 0;
-}
-
-.main-content .arrow-right {
-    position: absolute;
-    bottom: 0;
-    right: 0;
-}
-
-.main-content .title-list-user {
-    margin-top: 70px;
-}
-
-.main-content .wrap-list-user-sell {
-    position: relative;
-    background: #E9E9F1;
-    padding: 10px 20px;
-    margin-bottom: 3px;
-}
-.main-content .wrap-list-user-sell:hover {
-    background: #252774;
-    color: #fff
-}
-.main-content .wrap-list-user-sell:hover .notifi-price .notifi-bank-no-active{
-    color: #fff
-}
-.main-content .wrap-list-user-sell:hover .wrap-name-user-sell .name-user-sell-no-active{
-    background: url(../img/frontend/user-active.png) no-repeat 0 2px;
-    color: #faa72d;
-}
-
-.main-content .wrap-list-user-buy {
-    background: #FEF7E6;
-}
-.main-content .wrap-list-user-buy:hover {
-    background: #f5ad09
-}
-.main-content .wrap-list-user-buy:hover .wrap-name-user-sell .name-user-sell-no-active{
-    background: url(../img/frontend/user-buy-active.png) no-repeat 0 2px;
-    color: #252774;
-}
-.main-content .wrap-list-user-buy:hover .notifi-price .price{
-    color: #252774;
-}
-
-.main-content .wrap-list-user-sell .notifi-price .price {
-    font-size: 14px;
-    font-weight: bold;
-    color: #f5ad09;
-}
-
-.main-content .wrap-list-user-sell .notifi-price .notifi-bank,
-.main-content .wrap-list-user-sell .notifi-price-buy .notifi-bank {
-    color: #fff;
-}
-
-.main-content .wrap-list-user-sell .notifi-price .notifi-bank-no-active {
-    color: #000;
-}
-
-.main-content .wrap-name-user-sell {
-    position: relative;
-    margin-bottom: 8px;
-}
-
-.main-content .notifi-price, .main-content .notifi-price-buy {
-    margin-bottom: 8px;
-    padding-right: 70px;
-}
-
-.main-content .wrap-name-user-sell .name-user-sell,
-.main-content .wrap-name-user-sell .name-user-sell-active {
-    font-size: 14px;
-    font-weight: bold;
-    background: url(../img/frontend/user.png) no-repeat 0 2px;
-    padding-left: 20px
-}
-
-.main-content .wrap-name-user-sell .name-user-sell-no-active {
-    color: #000;
-}
-
-.main-content .wrap-list-user-sell .btn-sell, .main-content .wrap-list-user-buy .btn-buy {
-    text-align: center;
-    position: absolute;
-    text-transform: uppercase;
-    cursor: pointer;
-    height: 100%;
-    right: 0;
-    top: 0;
-    padding-top: 5%;
-    padding-left: 20px;
-    padding-right: 20px;
-    opacity: 0
-}
-.main-content .wrap-list-user-sell:hover .btn-sell, .main-content .wrap-list-user-buy:hover .btn-buy {
-    opacity: 1
-}
-.main-content .wrap-list-user-sell .btn-sell {
-    background: #f5ad09;
-    color: #252774;
-}
-.main-content .wrap-list-user-buy .btn-buy {
-    background: #252774;
-    color: #f5ad09;
-}
-
-/****** Dashboard ***************/
-.dashboard-nav-list {
-    margin-top: 30px
-}
-.dashboard-nav-list .nav-item{
-    margin-bottom: 30px;
-    background: #E9E9F1;
-    color: #252774;
-    text-align: center;
-    text-transform: uppercase;
-    font-weight: 500
-}
-.dashboard-nav-list .nav-item a{
-    color: #252774;
-    padding: 15px;
-    display: block
-}
-.dashboard-nav-list .nav-item.active{
-    background: #252774;
-    color: #fff
-}
-.dashboard-nav-list .nav-item.active a{color: #fff}
-.dashboard-btns{
-    margin-bottom: 30px;
-    text-align: right
-}
-.dashboard-btns .btn{
-    border-radius: 0;
-    color: #fff;
-    text-transform: uppercase;
-    font-weight: 500
-}
-.dashboard-btns .btn-sell{
-    background: #252774;
-}
-.dashboard-btns .btn-buy{
-    background: #f5ad09;
-    margin-left: 5px
-}
-.dashboard-content {
-    padding: 15px;
-    border: 1px solid #ccc
-}
-.dashboard-content h1{
-    text-transform: uppercase;
-    margin: 0 0 30px
-}
-.dashboard-content form label{
-    margin-top: 5px
-}
-.dashboard-content form .description{
-    color: #666
-}
-
-.my-offers .offer-item{
-    background: #eee;
-    padding: 20px;
-    margin-bottom: 30px;
-    border-left: 5px solid #252774
-}
-.my-offers .offer-item:hover{
-    background: #CCC
-}
-.my-offers .offer-item .primary{
-    font-size: 16px
-}
-.my-offers .offer-item .secondary{
-    font-size: 12px
-}
-.my-offers .offer-item .status.active{
-    color: green
-}
-.my-offers .offer-item .status.inactive{
-    color: #d32826
-}
-.my-offers .offer-item .num-vnd{
-    color: green;
-    font-weight: bold
-}
-.my-offers .offer-item .num-usd{
-    color: #faa72d;
-    font-weight: bold
-}
-.my-offers .offer-buy{
-    border-left: 5px solid #faa72d
-}
-.my-offers .actions .btn{
-    border-radius: 0;
-    border: 1px solid #ddd;
-}
-.my-offers .actions .btn-active{
-    background: #62C767;
-    border-color: #62C767;
-    color: #fff
-}
-.my-offers .actions .btn-active:hover{background: green}
-.my-offers .actions .btn-inactive{
-    background: #d9534f;
-    border-color: #d9534f;
-    color: #fff
-}
-.my-offers .actions .btn-inactive:hover{background: #d32826}
-.my-offers .actions .btn-edit{
-    background: #f4f4f4;
-    color: #333
-}
-.my-offers .actions .btn-edit:hover{background: #eee}
-.my-offers .actions .btn-del{
-    background: #f96136;
-    border-color: #f96136;
-    color: #fff
-}
-.my-offers .actions .btn-del:hover{background: #f23400}
-
-.trade-info .label{
-    font-size: 12px;
-    border-radius: 10px;
-}
-.trade-info .table thead{
-    text-transform: uppercase
-}
-.trade-info .offer-price .text-btc-color{
-    color: #f7931a
-}
-
 .user-profile .panel-heading .title{
     text-transform: uppercase;
     font-size: 20px;
     margin: 0;
 }
 .user-profile .table td{vertical-align: middle}
+
+/*#desktop-header .top-header ul.top-header-left {
+    margin-top: 16px !important;
+}
+
+#desktop-header .top-header ul.user-login {
+    margin-top: 5px !important;
+}
+
+#desktop-header .top-header ul.top-header-left, #desktop-header .top-header ul.user-login {
+    padding: 0;
+    margin: 0;
+}
+
+#desktop-header .top-header ul.top-header-left li {
+    margin-right: 40px;
+}
+
+#desktop-header .top-header ul.top-header-left li,
+#desktop-header .top-header ul.user-login li {
+    list-style: none;
+    display: inline-block;
+}*/
 
 /************** FOOTER STYLE **************************/
 #footer {
