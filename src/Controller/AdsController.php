@@ -4,9 +4,8 @@ namespace App\Controller;
 
 use Cake\Routing\Router;
 use Cake\Event\Event;
-use Cake\ORM\TableRegistry;
 
-class OffersController extends AppController {
+class AdsController extends AppController {
 
     public function beforeFilter(Event $event) {
         parent::beforeFilter($event);
@@ -26,39 +25,42 @@ class OffersController extends AppController {
             $msg = "";
             $redirect_url = "";
             $user = $this->Auth->user();
-            $price = str_replace(",", "", $this->request->data('price'));
-            $price_view = str_replace(",", "", $this->request->data('price_view'));
-            $min_amount = str_replace(",", "", $this->request->data('min_amount'));
-            $max_amount = str_replace(",", "", $this->request->data('max_amount'));
-            $limit_time = $this->request->data('limit_time');
+            $title = $this->request->data('title');
+            $description = $this->request->data('description');
+            $image_url = $this->request->data('image_url');
+            $target_url = $this->request->data('target_url');
+            $utm_params = $this->request->data('utm_params');
+            $_status = $this->request->data('status');
             
-            if($price < 15925 or $price > 45500){
-                $msg = "Giá bạn thực nhận phải nằm trong khoảng từ 15,925.00 đên 45,500.00";
-            } else if($min_amount < 5){
-                $msg = "Giới hạn tối thiểu là 5.00 USD";
-            } else if($max_amount > 100000){
-                $msg = "Giới hạn tối đa là 100,000.00 USD";
-            } else if(!in_array($limit_time, array(15, 30))){
-                $msg = "Giới hạn thời gian không đúng!";
+            if(empty($title)){
+                $msg = "Title is required!";
+            } else if(empty($image_url)){
+                $msg = "Image URL is required!";
+            } else if(empty($target_url)){
+                $msg = "Target URL is required!";
+            } else if(!in_array($_status, array(0,1))){
+                $msg = "Status is invalid!";
             } else {
-                $offer = $this->Offers->newEntity();
-                $offer->user_id = $user->id;
-                $offer->offer_type = "sell";
-                $offer->price = $price;
-                $offer->price_view = $price_view;
-                $offer->min_amount = $min_amount;
-                $offer->max_amount = $max_amount;
-                $offer->limit_time = $limit_time;
+                $entity = $this->Ads->newEntity();
+                $entity->user_id = $user->id;
+                $entity->title = $title;
+                $entity->description = $description;
+                $entity->image_url = $image_url;
+                $entity->target_url = $target_url;
+                $entity->utm_params = $utm_params;
+                $entity->status = $_status;
+                $entity->created_date = date('Y-m-d H:i:s');
+                $entity->updated_date = date('Y-m-d H:i:s');
 
-                if($this->Offers->save($offer)){
-                    $msg = "Tạo quảng cáo thành công!";
+                if($this->Ads->save($entity)){
+                    $msg = "Ads created successfully!";
                     $status = "success";
-                    $redirect_url = Router::url(['controller' => 'Dashboard', 'action' => 'myOffers']);
+                    $redirect_url = Router::url(['controller' => 'Dashboard', 'action' => 'index']);
                 } else {
-                    $msg = "Tạo quảng cáo không thành công!";
+                    $msg = "Ads creation failed!";
                 }
             }
-            
+
             echo json_encode(array(
                 'status' => $status,
                 'message' => $msg,
@@ -67,70 +69,7 @@ class OffersController extends AppController {
             exit;
         }
         
-        $this->set('title', 'Tạo quảng cáo Bán WEX');
-        $this->set('meta_description', $meta_description);
-        $this->set('og_type', $og_type);
-        $this->set('og_url', $og_url);
-        $this->set('og_image', $og_image);
-        $this->set('canonical', $og_url);
-    }
-    
-    /**
-     * Tạo quảng cáo Mua
-     */
-    public function createBuy(){
-        $meta_description = "";
-        $og_type = "article";
-        $og_url = SITE_URL . Router::url(['controller' => 'Offers', 'action' => 'createBuy']);
-        $og_image = SITE_URL . '/img/frontend/logo.png';
-        
-        if ($this->request->is('post')) {
-            $status = "error";
-            $msg = "";
-            $redirect_url = "";
-            $user = $this->Auth->user();
-            $price = str_replace(",", "", $this->request->data('price'));
-            $price_view = str_replace(",", "", $this->request->data('price_view'));
-            $min_amount = str_replace(",", "", $this->request->data('min_amount'));
-            $max_amount = str_replace(",", "", $this->request->data('max_amount'));
-            $limit_time = $this->request->data('limit_time');
-            
-            if($price < 15925 or $price > 45500){
-                $msg = "Giá bạn thực trả phải nằm trong khoảng từ 15,925.00 đên 45,500.00";
-            } else if($min_amount < 5){
-                $msg = "Giới hạn tối thiểu là 5.00 USD";
-            } else if($max_amount > 100000){
-                $msg = "Giới hạn tối đa là 100,000.00 USD";
-            } else if(!in_array($limit_time, array(15, 30))){
-                $msg = "Giới hạn thời gian không đúng!";
-            } else {
-                $offer = $this->Offers->newEntity();
-                $offer->user_id = $user->id;
-                $offer->offer_type = "buy";
-                $offer->price = $price;
-                $offer->price_view = $price_view;
-                $offer->min_amount = $min_amount;
-                $offer->max_amount = $max_amount;
-                $offer->limit_time = $limit_time;
-
-                if($this->Offers->save($offer)){
-                    $msg = "Tạo quảng cáo thành công!";
-                    $status = "success";
-                    $redirect_url = Router::url(['controller' => 'Dashboard', 'action' => 'myOffers']);
-                } else {
-                    $msg = "Tạo quảng cáo không thành công!";
-                }
-            }
-            
-            echo json_encode(array(
-                'status' => $status,
-                'message' => $msg,
-                'redirect_url' => $redirect_url,
-            ));
-            exit;
-        }
-        
-        $this->set('title', 'Tạo quảng cáo Mua WEX');
+        $this->set('title', 'Create an Ad banner');
         $this->set('meta_description', $meta_description);
         $this->set('og_type', $og_type);
         $this->set('og_url', $og_url);
@@ -141,25 +80,25 @@ class OffersController extends AppController {
     /**
      * Kích hoạt quảng cáo
      */
-    public function activateOffer($id = 0){
+    public function activate($id = 0){
         if ($this->request->is('post')) {
-            $offer = $this->Offers->get($id);
-            $offer->status = 1;
-            if($this->Offers->save($offer)){
+            $entity = $this->Ads->get($id);
+            $entity->status = 1;
+            if($this->Ads->save($entity)){
                 echo json_encode(array(
                     'status' => 'success',
-                    'message' => 'Kích hoạt thành công!',
+                    'message' => 'Ad activated successfully!',
                 ));
             } else {
                 echo json_encode(array(
                     'status' => 'error',
-                    'message' => 'Kích hoạt không thành công!',
+                    'message' => 'Ad activation failed!',
                 ));
             }
         } else {
             echo json_encode(array(
                 'status' => 'error',
-                'message' => 'Xảy ra lỗi!',
+                'message' => 'Error occurred!',
             ));
         }
         exit;
@@ -168,25 +107,25 @@ class OffersController extends AppController {
     /**
      * Tạm dừng quảng cáo
      */
-    public function deactivateOffer($id = 0){
+    public function deactivate($id = 0){
         if ($this->request->is('post')) {
-            $offer = $this->Offers->get($id);
-            $offer->status = 0;
-            if($this->Offers->save($offer)){
+            $entity = $this->Ads->get($id);
+            $entity->status = 0;
+            if($this->Ads->save($entity)){
                 echo json_encode(array(
                     'status' => 'success',
-                    'message' => 'Tạm dừng thành công!',
+                    'message' => 'Ad deactivate successfully!',
                 ));
             } else {
                 echo json_encode(array(
                     'status' => 'error',
-                    'message' => 'Tạm dừng không thành công!',
+                    'message' => 'Ad deactivation failed!',
                 ));
             }
         } else {
             echo json_encode(array(
                 'status' => 'error',
-                'message' => 'Xảy ra lỗi!',
+                'message' => 'Error occurred!',
             ));
         }
         exit;
@@ -197,22 +136,22 @@ class OffersController extends AppController {
      */
     public function deleteOffer($id = 0){
         if ($this->request->is('post')) {
-            $offer = $this->Offers->get($id);
-            if($this->Offers->delete($offer)){
+            $entity = $this->Ads->get($id);
+            if($this->Ads->delete($entity)){
                 echo json_encode(array(
                     'status' => 'success',
-                    'message' => 'Xóa quảng cáo thành công!',
+                    'message' => 'Ad deleted successfully!',
                 ));
             } else {
                 echo json_encode(array(
                     'status' => 'error',
-                    'message' => 'Xóa quảng cáo không thành công!',
+                    'message' => 'Delete failed!',
                 ));
             }
         } else {
             echo json_encode(array(
                 'status' => 'error',
-                'message' => 'Xảy ra lỗi!',
+                'message' => 'Error occurred!',
             ));
         }
         exit;

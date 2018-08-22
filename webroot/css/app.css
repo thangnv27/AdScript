@@ -168,28 +168,17 @@ body.app .message{
 }
 .user-profile .table td{vertical-align: middle}
 
-/*#desktop-header .top-header ul.top-header-left {
-    margin-top: 16px !important;
-}
-
-#desktop-header .top-header ul.user-login {
-    margin-top: 5px !important;
-}
-
-#desktop-header .top-header ul.top-header-left, #desktop-header .top-header ul.user-login {
-    padding: 0;
+.panel-heading .title{
     margin: 0;
+    padding: 0;
+    font-size: 1.6em
 }
-
-#desktop-header .top-header ul.top-header-left li {
-    margin-right: 40px;
+.panel-heading .btn{
+    color: #fff
 }
-
-#desktop-header .top-header ul.top-header-left li,
-#desktop-header .top-header ul.user-login li {
-    list-style: none;
-    display: inline-block;
-}*/
+.panel-footer .pagination{
+    margin: 0
+}
 
 /************** FOOTER STYLE **************************/
 #footer {

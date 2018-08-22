@@ -13,11 +13,27 @@ class DashboardController extends AppController {
     }
     
     public function index(){
+        // SEO
         $meta_description = "";
         $og_type = "article";
         $og_url = SITE_URL . Router::url(['controller' => 'Dashboard', 'action' => 'index']);
         $og_image = SITE_URL . '/img/frontend/logo.png';
         
+        // Data
+        $ads_table = TableRegistry::get('ads');
+        $query = $ads_table->find('all', array(
+//            'conditions' => array(
+//                'status' => 1,
+//            )
+        ))->contain(['Users']);
+        $ads = $this->paginate($query, [
+            'limit' => 50,
+            'order' => [
+                'Ads.price' => 'asc'
+            ]
+        ]);
+        
+        $this->set('ads', $ads);
         $this->set('title', 'Bảng điều khiển');
         $this->set('meta_description', $meta_description);
         $this->set('og_type', $og_type);

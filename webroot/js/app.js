@@ -175,13 +175,6 @@ jQuery(document).ready(function ($) {
         }
     });
     
-    jQuery(".slide-header .btn-now").click(function(){
-        jQuery('body,html').animate({
-            scrollTop: jQuery('.title-list-user').offset().top - 10
-        }, 800);
-        return false;
-    });
-    
     // Dang ky thanh vien
     jQuery("#signup_form").submit(function (){
         var _form = this;
@@ -254,74 +247,14 @@ jQuery(document).ready(function ($) {
         return false;
     });
     
-    // Format gia tien
-    jQuery("#frmCreateOfferSell #price, #frmCreateOfferSell #price_view, #frmCreateOfferBuy #price, #frmCreateOfferBuy #price_view").keyup(function(event){
-        // skip for arrow keys
-        if(event.which >= 37 && event.which <= 40) return;
-
-        // format number
-        jQuery(this).val(function(index, value) {
-            return value.replace(/\D/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-        });
-    });
-    jQuery("#frmCreateOfferSell #min_amount, #frmCreateOfferSell #max_amount, #frmCreateOfferBuy #min_amount, #frmCreateOfferBuy #max_amount").change(function(event){
-        jQuery(this).val(function(index, value) {
-            return numeral(value).format('0,0.00');
-        });
-    });
-    
-    // Tinh chenh lech gia ban
-    jQuery("#frmCreateOfferSell #price").change(function(event){
-        var value = jQuery(this).val().replace(",", "");
-        if(isNaN(parseFloat(value))){
-            jQuery("#frmCreateOfferSell #price_view").val(0);
-        } else {
-            var _value = parseFloat(value) + parseFloat(value) * 0.004; // 0.4%
-            var number = numeral(_value).format('0,0');
-            jQuery("#frmCreateOfferSell #price_view").val(number);
-        }
-    });
-    jQuery("#frmCreateOfferSell #price_view").change(function(event){
-        var value = jQuery(this).val().replace(",", "");
-        if(isNaN(parseFloat(value))){
-            jQuery("#frmCreateOfferSell #price").val(0);
-        } else {
-            var _value = parseFloat(value) / (1 + 0.004); // 0.4%
-            var number = numeral(_value).format('0,0');
-            jQuery("#frmCreateOfferSell #price").val(number);
-        }
-    });
-    
-    // Tinh chenh lech gia mua
-    jQuery("#frmCreateOfferBuy #price").change(function(event){
-        var value = jQuery(this).val().replace(",", "");
-        if(isNaN(parseFloat(value))){
-            jQuery("#frmCreateOfferBuy #price_view").val(0);
-        } else {
-            var _value = parseFloat(value) / (1 + 0.004); // 0.4%
-            var number = numeral(_value).format('0,0');
-            jQuery("#frmCreateOfferBuy #price_view").val(number);
-        }
-    });
-    jQuery("#frmCreateOfferBuy #price_view").change(function(event){
-        var value = jQuery(this).val().replace(",", "");
-        if(isNaN(parseFloat(value))){
-            jQuery("#frmCreateOfferBuy #price").val(0);
-        } else {
-            var _value = parseFloat(value) + parseFloat(value) * 0.004; // 0.4%
-            var number = numeral(_value).format('0,0');
-            jQuery("#frmCreateOfferBuy #price").val(number);
-        }
-    });
-    
-    // Tao quang cao ban - Sell
-    jQuery("#frmCreateOfferSell").submit(function(){
+    // Tao quang cao
+    jQuery("#frmAddAds").submit(function(){
         if(is_auth){
             var _form = this;
             var _action = jQuery(this).attr('action');
             toastr.options.closeButton = true;
             toastr.options.positionClass = "toast-top-center";
-            jQuery("#frmCreateOfferSell .btn-submit").attr('disabled', 'disabled').button('loading');
+            jQuery("#frmAddAds .btn-submit").attr('disabled', 'disabled').button('loading');
             jQuery.ajax({
                 url: _action, type: "POST", dataType: "json", cache: false,
                 data: jQuery(_form).serialize(),
@@ -340,7 +273,7 @@ jQuery(document).ready(function ($) {
                     toastr.error(errorThrown, '', {timeOut: 5000});
                 },
                 complete:function(){
-                    jQuery("#frmCreateOfferSell .btn-submit").removeAttr('disabled').button('reset');
+                    jQuery("#frmAddAds .btn-submit").removeAttr('disabled').button('reset');
                 }
             });
         } else {
@@ -349,84 +282,7 @@ jQuery(document).ready(function ($) {
         return false;
     });
     
-    // Tao quang cao mua - Buy
-    jQuery("#frmCreateOfferBuy").submit(function(){
-        if(is_auth){
-            var _form = this;
-            var _action = jQuery(this).attr('action');
-            toastr.options.closeButton = true;
-            toastr.options.positionClass = "toast-top-center";
-            jQuery("#frmCreateOfferBuy .btn-submit").attr('disabled', 'disabled').button('loading');
-            jQuery.ajax({
-                url: _action, type: "POST", dataType: "json", cache: false,
-                data: jQuery(_form).serialize(),
-                success: function(response, textStatus, XMLHttpRequest){
-                    if(response && response.status === 'success'){
-                        toastr.success(response.message, '', {timeOut: 5000});
-                        _form.reset();
-                        setTimeout(function(){
-                            window.location = response.redirect_url;
-                        }, 3000);
-                    }else if(response.status === 'error'){
-                        toastr.error(response.message, '', {timeOut: 5000});
-                    }
-                },
-                error: function(MLHttpRequest, textStatus, errorThrown){
-                    toastr.error(errorThrown, '', {timeOut: 5000});
-                },
-                complete:function(){
-                    jQuery("#frmCreateOfferBuy .btn-submit").removeAttr('disabled').button('reset');
-                }
-            });
-        } else {
-            openDialogLogin();
-        }
-        return false;
-    });
-    
-    // Tao giao dich mua/ban
-    jQuery("#frmTradeCreate #amount").change(function(event){
-        var value = jQuery(this).val().replace(",", "");
-        if(isNaN(parseFloat(value))){
-            jQuery("#frmTradeCreate #amount").val(0);
-            jQuery("#frmTradeCreate #fiat_amount").val(0);
-        } else {
-            var _value = parseFloat(value) * parseFloat(jQuery("#price_view").val());
-            var number = numeral(_value).format('0,0');
-            jQuery("#frmTradeCreate #fiat_amount").val(number);
-        }
-    });
-    jQuery("#frmTradeCreate").submit(function(){
-        if(is_auth){
-            var _form = this;
-            var _action = jQuery(this).attr('action');
-            toastr.options.closeButton = true;
-            toastr.options.positionClass = "toast-top-center";
-            jQuery("#frmTradeCreate .btn-submit").attr('disabled', 'disabled').button('loading');
-            jQuery.ajax({
-                url: _action, type: "POST", dataType: "json", cache: false,
-                data: jQuery(_form).serialize(),
-                success: function(response, textStatus, XMLHttpRequest){
-                    if(response && response.status === 'success'){
-                        toastr.success(response.message, '', {timeOut: 5000});
-                    }else if(response.status === 'error'){
-                        toastr.error(response.message, '', {timeOut: 5000});
-                    }
-                },
-                error: function(MLHttpRequest, textStatus, errorThrown){
-                    toastr.error(errorThrown, '', {timeOut: 5000});
-                },
-                complete:function(){
-                    jQuery("#frmTradeCreate .btn-submit").removeAttr('disabled').button('reset');
-                }
-            });
-        } else {
-            openDialogLogin();
-        }
-        return false;
-    });
-    
-    // Activate offer
+    // Activate Ads
     jQuery(".my-offers .offer-item .actions .btn-active").click(function(){
         if(is_auth){
             var offer_id = jQuery(this).parent().data('id');
@@ -453,7 +309,7 @@ jQuery(document).ready(function ($) {
         }
     });
     
-    // Pause offer
+    // Pause Ads
     jQuery(".my-offers .offer-item .actions .btn-inactive").click(function(){
         if(is_auth){
             var offer_id = jQuery(this).parent().data('id');
@@ -480,7 +336,7 @@ jQuery(document).ready(function ($) {
         }
     });
     
-    // Delete offer
+    // Delete Ads
     jQuery(".my-offers .offer-item .actions .btn-del").click(function(){
         if(is_auth){
             if(confirm('Bạn có chắc chắn muốn xóa quảng cáo này không?')){
@@ -506,14 +362,5 @@ jQuery(document).ready(function ($) {
             openDialogLogin();
         }
     });
-    
-    // Home: Buy offer
-    jQuery(".sell-container .btn-sell, .buy-container .btn-buy").click(function(){
-        if(is_auth){
-            window.location = jQuery(this).data('url');
-        } else {
-            openDialogLogin();
-        }
-    });
-    
+
 });
