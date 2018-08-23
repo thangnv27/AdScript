@@ -282,20 +282,54 @@ jQuery(document).ready(function ($) {
         return false;
     });
     
-    // Activate Ads
-    jQuery(".my-offers .offer-item .actions .btn-active").click(function(){
+    // Chinh sua quang cao
+    jQuery("#frmEditAds").submit(function(){
         if(is_auth){
-            var offer_id = jQuery(this).parent().data('id');
+            var _form = this;
+            var _action = jQuery(this).attr('action');
             toastr.options.closeButton = true;
-            toastr.options.positionClass = "toast-top-right";
+            toastr.options.positionClass = "toast-top-center";
+            jQuery("#frmEditAds .btn-submit").attr('disabled', 'disabled').button('loading');
             jQuery.ajax({
-                url: siteUrl + "/offers/activateOffer/" + offer_id, type: "POST", dataType: "json", cache: false,
+                url: _action, type: "POST", dataType: "json", cache: false,
+                data: jQuery(_form).serialize(),
                 success: function(response, textStatus, XMLHttpRequest){
                     if(response && response.status === 'success'){
                         toastr.success(response.message, '', {timeOut: 5000});
-                        jQuery(".my-offers #offer_" + offer_id).find('.status').addClass('active').removeClass('inactive').html("Kích hoạt");
-                        jQuery(".my-offers #offer_" + offer_id).find('.btn-active').addClass('hide');
-                        jQuery(".my-offers #offer_" + offer_id).find('.btn-inactive').removeClass('hide');
+                        _form.reset();
+                        setTimeout(function(){
+                            window.location = response.redirect_url;
+                        }, 3000);
+                    }else if(response.status === 'error'){
+                        toastr.error(response.message, '', {timeOut: 5000});
+                    }
+                },
+                error: function(MLHttpRequest, textStatus, errorThrown){
+                    toastr.error(errorThrown, '', {timeOut: 5000});
+                },
+                complete:function(){
+                    jQuery("#frmEditAds .btn-submit").removeAttr('disabled').button('reset');
+                }
+            });
+        } else {
+            openDialogLogin();
+        }
+        return false;
+    });
+    
+    // Activate Ads
+    jQuery(".tbl-ads-list .actions .btn-active").click(function(){
+        if(is_auth){
+            var ad_id = jQuery(this).parent().data('id');
+            toastr.options.closeButton = true;
+            toastr.options.positionClass = "toast-top-right";
+            jQuery.ajax({
+                url: siteUrl + "/ads/activate/" + ad_id, type: "POST", dataType: "json", cache: false,
+                success: function(response, textStatus, XMLHttpRequest){
+                    if(response && response.status === 'success'){
+                        toastr.success(response.message, '', {timeOut: 5000});
+                        jQuery(".tbl-ads-list #ad_" + ad_id).find('.btn-active').addClass('hide');
+                        jQuery(".tbl-ads-list #ad_" + ad_id).find('.btn-inactive').removeClass('hide');
                     }else if(response.status === 'error'){
                         toastr.error(response.message, '', {timeOut: 5000});
                     }
@@ -310,19 +344,18 @@ jQuery(document).ready(function ($) {
     });
     
     // Pause Ads
-    jQuery(".my-offers .offer-item .actions .btn-inactive").click(function(){
+    jQuery(".tbl-ads-list .actions .btn-inactive").click(function(){
         if(is_auth){
-            var offer_id = jQuery(this).parent().data('id');
+            var ad_id = jQuery(this).parent().data('id');
             toastr.options.closeButton = true;
             toastr.options.positionClass = "toast-top-right";
             jQuery.ajax({
-                url: siteUrl + "/offers/deactivateOffer/" + offer_id, type: "POST", dataType: "json", cache: false,
+                url: siteUrl + "/ads/deactivate/" + ad_id, type: "POST", dataType: "json", cache: false,
                 success: function(response, textStatus, XMLHttpRequest){
                     if(response && response.status === 'success'){
                         toastr.success(response.message, '', {timeOut: 5000});
-                        jQuery(".my-offers #offer_" + offer_id).find('.status').addClass('inactive').removeClass('active').html("Tạm dừng");
-                        jQuery(".my-offers #offer_" + offer_id).find('.btn-active').removeClass('hide');
-                        jQuery(".my-offers #offer_" + offer_id).find('.btn-inactive').addClass('hide');
+                        jQuery(".tbl-ads-list #ad_" + ad_id).find('.btn-active').removeClass('hide');
+                        jQuery(".tbl-ads-list #ad_" + ad_id).find('.btn-inactive').addClass('hide');
                     }else if(response.status === 'error'){
                         toastr.error(response.message, '', {timeOut: 5000});
                     }
@@ -337,18 +370,18 @@ jQuery(document).ready(function ($) {
     });
     
     // Delete Ads
-    jQuery(".my-offers .offer-item .actions .btn-del").click(function(){
+    jQuery(".tbl-ads-list .actions .btn-del").click(function(){
         if(is_auth){
-            if(confirm('Bạn có chắc chắn muốn xóa quảng cáo này không?')){
-                var offer_id = jQuery(this).parent().data('id');
+            if(confirm('Are you sure?')){
+                var ad_id = jQuery(this).parent().data('id');
                 toastr.options.closeButton = true;
                 toastr.options.positionClass = "toast-top-right";
                 jQuery.ajax({
-                    url: siteUrl + "/offers/deleteOffer/" + offer_id, type: "POST", dataType: "json", cache: false,
+                    url: siteUrl + "/ads/delete/" + ad_id, type: "POST", dataType: "json", cache: false,
                     success: function(response, textStatus, XMLHttpRequest){
                         if(response && response.status === 'success'){
                             toastr.success(response.message, '', {timeOut: 5000});
-                            jQuery(".my-offers #offer_" + offer_id).remove();
+                            jQuery(".tbl-ads-list #ad_" + ad_id).remove();
                         }else if(response.status === 'error'){
                             toastr.error(response.message, '', {timeOut: 5000});
                         }

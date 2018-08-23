@@ -63,6 +63,21 @@ endif;
                         </div>
                     </div>
                     <div class="form-group row">
+                        <label class="col-sm-3">Size</label>
+                        <div class="col-sm-9">
+                            <div class="row">
+                                <div class="col-xs-6 row">
+                                    <div class="col-xs-3">Width:</div>
+                                    <div class="col-xs-9"><input type="number" name="width" value="" placeholder="728" class="form-control" /></div>
+                                </div>
+                                <div class="col-xs-6 row">
+                                    <div class="col-xs-3">Height:</div>
+                                    <div class="col-xs-9"><input type="number" name="height" value="" placeholder="90" class="form-control" /></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
                         <label class="col-sm-3">Status</label>
                         <div class="col-sm-9">
                             <label for="status_1" class="normal">

@@ -17,7 +17,7 @@ class AdsController extends AppController {
     public function add(){
         $meta_description = "";
         $og_type = "article";
-        $og_url = SITE_URL . Router::url(['controller' => 'Offers', 'action' => 'createSell']);
+        $og_url = SITE_URL . Router::url(['controller' => 'Ads', 'action' => 'createSell']);
         $og_image = SITE_URL . '/img/frontend/logo.png';
 
         if ($this->request->is('post')) {
@@ -30,6 +30,8 @@ class AdsController extends AppController {
             $image_url = $this->request->data('image_url');
             $target_url = $this->request->data('target_url');
             $utm_params = $this->request->data('utm_params');
+            $width = intval($this->request->data('width'));
+            $height = intval($this->request->data('height'));
             $_status = $this->request->data('status');
             
             if(empty($title)){
@@ -48,6 +50,8 @@ class AdsController extends AppController {
                 $entity->image_url = $image_url;
                 $entity->target_url = $target_url;
                 $entity->utm_params = $utm_params;
+                $entity->width = $width;
+                $entity->height = $height;
                 $entity->status = $_status;
                 $entity->created_date = date('Y-m-d H:i:s');
                 $entity->updated_date = date('Y-m-d H:i:s');
@@ -70,6 +74,75 @@ class AdsController extends AppController {
         }
         
         $this->set('title', 'Create an Ad banner');
+        $this->set('meta_description', $meta_description);
+        $this->set('og_type', $og_type);
+        $this->set('og_url', $og_url);
+        $this->set('og_image', $og_image);
+        $this->set('canonical', $og_url);
+    }
+    
+    /**
+     * Chỉnh sửa quảng cáo
+     */
+    public function edit($id = 0){
+        $meta_description = "";
+        $og_type = "article";
+        $og_url = SITE_URL . Router::url(['controller' => 'Ads', 'action' => 'createSell']);
+        $og_image = SITE_URL . '/img/frontend/logo.png';
+
+        $entity = $this->Ads->get($id);
+        if ($this->request->is('post')) {
+            $status = "error";
+            $msg = "";
+            $redirect_url = "";
+            $title = $this->request->data('title');
+            $description = $this->request->data('description');
+            $image_url = $this->request->data('image_url');
+            $target_url = $this->request->data('target_url');
+            $utm_params = $this->request->data('utm_params');
+            $width = intval($this->request->data('width'));
+            $height = intval($this->request->data('height'));
+            $_status = $this->request->data('status');
+            
+            if(empty($title)){
+                $msg = "Title is required!";
+            } else if(empty($image_url)){
+                $msg = "Image URL is required!";
+            } else if(empty($target_url)){
+                $msg = "Target URL is required!";
+            } else if(!in_array($_status, array(0,1))){
+                $msg = "Status is invalid!";
+            } else {
+                $entity->title = $title;
+                $entity->description = $description;
+                $entity->image_url = $image_url;
+                $entity->target_url = $target_url;
+                $entity->utm_params = $utm_params;
+                $entity->width = $width;
+                $entity->height = $height;
+                $entity->status = $_status;
+                $entity->created_date = date('Y-m-d H:i:s');
+                $entity->updated_date = date('Y-m-d H:i:s');
+
+                if($this->Ads->save($entity)){
+                    $msg = "Ad edited successfully!";
+                    $status = "success";
+                    $redirect_url = Router::url(['controller' => 'Dashboard', 'action' => 'index']);
+                } else {
+                    $msg = "Edit failed!";
+                }
+            }
+
+            echo json_encode(array(
+                'status' => $status,
+                'message' => $msg,
+                'redirect_url' => $redirect_url,
+            ));
+            exit;
+        }
+        
+        $this->set('ad', $entity);
+        $this->set('title', 'Edit Ad banner');
         $this->set('meta_description', $meta_description);
         $this->set('og_type', $og_type);
         $this->set('og_url', $og_url);
@@ -134,7 +207,7 @@ class AdsController extends AppController {
     /**
      * Xóa quảng cáo
      */
-    public function deleteOffer($id = 0){
+    public function delete($id = 0){
         if ($this->request->is('post')) {
             $entity = $this->Ads->get($id);
             if($this->Ads->delete($entity)){

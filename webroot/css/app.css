@@ -180,6 +180,38 @@ body.app .message{
     margin: 0
 }
 
+.tbl-ads-list .actions .btn{
+    border-radius: 0;
+    border: 1px solid #ddd;
+    padding: 5px 8px
+}
+.tbl-ads-list .actions .btn-info{
+    color: #fff
+}
+.tbl-ads-list .actions .btn-active{
+    background: #62C767;
+    border-color: #62C767;
+    color: #fff
+}
+.tbl-ads-list .actions .btn-active:hover{background: green}
+.tbl-ads-list .actions .btn-inactive{
+    background: #d9534f;
+    border-color: #d9534f;
+    color: #fff
+}
+.tbl-ads-list .actions .btn-inactive:hover{background: #d32826}
+.tbl-ads-list .actions .btn-edit{
+    background: #f4f4f4;
+    color: #333
+}
+.tbl-ads-list .actions .btn-edit:hover{background: #eee}
+.tbl-ads-list .actions .btn-del{
+    background: #f96136;
+    border-color: #f96136;
+    color: #fff
+}
+.tbl-ads-list .actions .btn-del:hover{background: #f23400}
+
 /************** FOOTER STYLE **************************/
 #footer {
     margin-top: 70px;

@@ -21,15 +21,11 @@ class DashboardController extends AppController {
         
         // Data
         $ads_table = TableRegistry::get('ads');
-        $query = $ads_table->find('all', array(
-//            'conditions' => array(
-//                'status' => 1,
-//            )
-        ))->contain(['Users']);
+        $query = $ads_table->find('all')->contain(['Users']);
         $ads = $this->paginate($query, [
             'limit' => 50,
             'order' => [
-                'Ads.price' => 'asc'
+                'Ads.status' => 'desc'
             ]
         ]);
         

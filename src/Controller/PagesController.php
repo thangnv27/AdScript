@@ -57,8 +57,8 @@ class PagesController extends AppController
                 $this->redirect(["controller" => "Dashboard", "action" => "index"]);
                 
                 // SEO
-                $title = __('Trao đổi mua bán WEX');
-                $meta_description = __('mô tả trang web');
+                $title = __('AdScript');
+                $meta_description = __('');
                 $og_type = "website";
                 $og_image = SITE_URL . '/img/frontend/logo.png';
                 

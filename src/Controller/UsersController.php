@@ -234,7 +234,7 @@ class UsersController extends AppController {
     public function forgotPassword() {
         if ($this->request->is('post')) {
             $status = "error";
-            $msg = "Đang cập nhật!";
+            $msg = "Updating!";
 
             echo json_encode(array(
                 'status' => $status,
@@ -281,7 +281,7 @@ class UsersController extends AppController {
         $user = $this->Users->findByUsername($username)
                 ->contain([
                     'Wallets', 'UserMeta', 
-                    'Trades' => ['fields' => ['Trades.id', 'Trades.user_id']],
+                    'Ads' => ['fields' => ['Ads.id', 'Ads.user_id']],
                     'LogLogin' => function($q) {
                             return $q->order('LogLogin.login_date DESC')->limit(1);
                         }
@@ -294,7 +294,7 @@ class UsersController extends AppController {
         
         // SEO
         $title = __('Hồ sơ của {0}', [$username]);
-        $meta_description = __('mô tả trang web');
+        $meta_description = __('');
         $og_type = "article";
         $og_image = SITE_URL . '/img/frontend/logo.png';
         $og_url = SITE_URL . Router::url(['controller' => 'Users', 'action' => 'profile', $username]);
@@ -317,7 +317,7 @@ class UsersController extends AppController {
             $user = $this->Users->findById($user->id)
                 ->contain([
                     'Wallets', 'UserMeta', 
-                    'Trades' => ['fields' => ['Trades.id', 'Trades.user_id']],
+                    'Ads' => ['fields' => ['Ads.id', 'Ads.user_id']],
                     'LogLogin' => function($q) {
                             return $q->order('LogLogin.login_date DESC')->limit(1);
                         }
@@ -325,8 +325,8 @@ class UsersController extends AppController {
         }
         
         // SEO
-        $title = __('Chỉnh sửa hồ sơ cá nhân');
-        $meta_description = __('mô tả trang web');
+        $title = __('Edit your profile');
+        $meta_description = __('');
         $og_type = "article";
         $og_image = SITE_URL . '/img/frontend/logo.png';
         $og_url = SITE_URL . Router::url(['controller' => 'Users', 'action' => 'editProfile']);
