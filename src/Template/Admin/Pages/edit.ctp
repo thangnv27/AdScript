@@ -1,19 +1,4 @@
-<?php
-
-use Cake\Cache\Cache;
-use Cake\Core\Configure;
-use Cake\Core\Plugin;
-use Cake\Datasource\ConnectionManager;
-use Cake\Error\Debugger;
-use Cake\Network\Exception\NotFoundException;
-use App\Controller\Component\CommonsComponent;
-
-$this->layout = 'admin';
-
-if (!Configure::read('debug')):
-    throw new NotFoundException('Please replace src/Template/Admin/Pages/edit.ctp with your own version.');
-endif;
-?>
+<?php $this->layout = 'admin'; ?>
 <div class="container">
     <div class="info-customer">
         <div class="title-customer pull-left">

@@ -214,7 +214,7 @@ body.app .message{
 
 /************** FOOTER STYLE **************************/
 #footer {
-    margin-top: 70px;
+    margin-top: 50px;
 }
 
 .footer1 {
@@ -289,7 +289,7 @@ body.app .message{
 }
 
 .footer2 {
-    background: #181a57;
+    background: #337AB7;
     text-align: center;
     height: 50px;
     padding-top: 19px;

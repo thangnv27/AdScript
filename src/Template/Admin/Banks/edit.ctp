@@ -1,16 +1,4 @@
-<?php
-
-use Cake\Cache\Cache;
-use Cake\Core\Configure;
-use Cake\Error\Debugger;
-use Cake\Network\Exception\NotFoundException;
-
-$this->layout = 'admin';
-
-if (!Configure::read('debug')):
-    throw new NotFoundException('Please replace src/Template/Admin/Banks/edit.ctp with your own version.');
-endif;
-?>
+<?php $this->layout = 'admin'; ?>
 <div class="container">
     <div class="info-customer">
         <div class="title-customer pull-left">

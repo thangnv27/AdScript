@@ -69,6 +69,17 @@ jQuery(document).ready(function ($) {
     jQuery("#nNote").click(function () {
         jQuery(this).attr('class', '').hide("slow").html("");
     });
+    
+    jQuery(window).bind('load resize', function(){
+        if(jQuery(window).height() > jQuery('body').height()){
+            jQuery("#footer").css({
+                position: 'absolute',
+                bottom: 0,
+                left: 0,
+                width: '100%'
+            });
+        }
+    });
 
     // Back to top
     jQuery("#back-top").click(function () {

@@ -27,6 +27,8 @@ class PagesController extends AppController
      */
     public function display()
     {
+        return $this->redirect(["controller" => "Dashboard", "action" => "index"]);
+        //-------------------------
         $path = func_get_args();
 
         $count = count($path);
@@ -54,8 +56,6 @@ class PagesController extends AppController
         
         switch ($page) {
             case "home":
-                $this->redirect(["controller" => "Dashboard", "action" => "index"]);
-                
                 // SEO
                 $title = __('AdScript');
                 $meta_description = __('');

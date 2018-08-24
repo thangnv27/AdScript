@@ -18,6 +18,11 @@ class AdminsController extends AppController {
 //            'loginRedirect' => ['prefix' => false, 'controller' => 'Admins', 'action' => 'display', 'index'],
 //            'logoutRedirect' => ['prefix' => false, 'controller' => 'Pages', 'action' => 'display', 'home']
 //        ]);
+        
+        $user = $this->Auth->user();
+        if (!$user or !parent::isAuthorized($user)){
+            $this->redirect(SITE_URL);
+        }
     }
     
     public function beforeFilter(Event $event) {
