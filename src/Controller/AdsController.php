@@ -90,7 +90,11 @@ class AdsController extends AppController {
         $og_url = SITE_URL . Router::url(['controller' => 'Ads', 'action' => 'createSell']);
         $og_image = SITE_URL . '/img/frontend/logo.png';
 
+        $user = $this->Auth->user();
         $entity = $this->Ads->get($id);
+        if(!$entity or $user->id != $entity->user_id){
+            return $this->redirect(SITE_URL);
+        }
         if ($this->request->is('post')) {
             $status = "error";
             $msg = "";

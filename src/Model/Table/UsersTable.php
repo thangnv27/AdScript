@@ -13,6 +13,7 @@ class UsersTable extends Table {
         $this->hasOne('Wallets');
         $this->hasOne('UserMeta');
         $this->hasMany('LogLogin');
+        $this->hasMany('Ads');
     }
 
     public function validationDefault(Validator $validator) {

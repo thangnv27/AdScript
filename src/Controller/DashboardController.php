@@ -20,8 +20,13 @@ class DashboardController extends AppController {
         $og_image = SITE_URL . '/img/frontend/logo.png';
         
         // Data
+        $user = $this->Auth->user();
         $ads_table = TableRegistry::get('ads');
-        $query = $ads_table->find('all')->contain(['Users']);
+        $query = $ads_table->find('all', array(
+            'conditions' => array(
+                'ads.user_id' => $user->id,
+            )
+        ));
         $ads = $this->paginate($query, [
             'limit' => 50,
             'order' => [
