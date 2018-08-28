@@ -68,6 +68,8 @@ class BanksController extends AdminsController {
                 $bank->branch = $branch;
                 $bank->account_number = $account_number;
                 $bank->account_name = $account_name;
+                $bank->created_date = date('Y-m-d H:i:s');
+                $bank->updated_date = date('Y-m-d H:i:s');
                 $savedBank = $this->Banks->save($bank);
                 if ($savedBank) {
                     $this->Flash->success(__('Thêm mới thành công!'));
@@ -132,6 +134,7 @@ class BanksController extends AdminsController {
         $bank = $this->Banks->get($id);
         if ($bank) {
             $bank->is_active = 1;
+            $bank->updated_date = date('Y-m-d H:i:s');
             if ($this->Banks->save($bank)) {
                 $this->Banks->query()->update()
                     ->set(['is_active' => 0])

@@ -115,7 +115,7 @@ $pass = $this->request->params['pass'];
                             <ul class="dropdown-menu">
                                 <li><a href="<?=$this->Url->build(['controller' => 'Users', 'action' => 'editProfile'])?>">
                                        <span class="fa fa-user-circle-o"></span> Your Profile</a></li>
-                                <li><a href="#">
+                                <li><a href="<?=$this->Url->build(['controller' => 'Users', 'action' => 'changePassword'])?>">
                                        <span class="fa fa-key"></span> Change Password</a></li>
                                 <li role="separator" class="divider"></li>
                                 <li><a href="<?=$this->Url->build(['controller' => 'Users', 'action' => 'logout'])?>" 

@@ -308,6 +308,18 @@ var AdminAjax = {
 setInterval("checkLoggedIn()", 5 * 1000);
 $(function () {
     PPOFixed.mainMenu();
+    
+    // Fixed footer
+    $(window).bind('load resize', function(){
+        if($(window).height() > $('body').height()){
+            $(".footer").css({
+                position: 'absolute',
+                bottom: 0,
+                left: 0,
+                width: '100%'
+            });
+        }
+    });
 
     // Fit image
     if ($(".featured_image img").length > 0) {

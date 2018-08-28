@@ -5,6 +5,7 @@ namespace App\Controller;
 use Cake\Routing\Router;
 use Cake\Event\Event;
 use Cake\ORM\TableRegistry;
+use Cake\Cache\Cache;
 
 class BannersController extends AppController {
 
@@ -37,8 +38,14 @@ class BannersController extends AppController {
      * Hiển thị quảng cáo
      */
     public function display($id = 0){
-        $ads_table = TableRegistry::get('ads');
-        $entity = $ads_table->get($id);
+        $entity = Cache::read('ad_' . $id);
+
+        if ($entity == false) {
+            $ads_table = TableRegistry::get('ads');
+            $entity = $ads_table->get($id);
+            Cache::write('ad_' . $id, $entity);
+        }
+
         $this->set('ad', $entity);
         $this->layout = false;
     }

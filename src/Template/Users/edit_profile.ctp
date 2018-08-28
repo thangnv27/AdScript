@@ -9,49 +9,66 @@
                     <div class="panel-heading">
                         <h1 class="title"><?=$title?></h1>
                     </div>
-                    <form class="form" action="" method="post" enctype="multipart/form-data">
+                    <form class="form" id="frmEditProfile" action="" method="post" enctype="multipart/form-data">
                         <table class="table table-bordered mb0">
                             <tbody>
                                 <tr>
-                                    <td width="40%">Họ và tên</td>
+                                    <td width="40%">Full Name</td>
                                     <td>
-                                        <input type="text" name="name" value="<?=$user->user_metum->fullname?>" class="form-control" />
+                                        <input type="text" name="fullname" value="<?=$user->user_metum->fullname?>" class="form-control" />
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td>Địa chỉ</td>
+                                    <td>Address</td>
                                     <td>
                                         <input type="text" name="address" value="<?=$user->user_metum->address?>" class="form-control" />
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td>Số giao dịch</td>
+                                    <td>Phone Number</td>
                                     <td>
-                                        <?php echo count($user->trades) ?>
+                                        <input type="text" name="phone" value="<?=$user->user_metum->phone?>" class="form-control" />
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td>Ngày đăng ký</td>
+                                    <td>Passport</td>
+                                    <td>
+                                        <input type="text" name="passport" value="<?=$user->user_metum->passport?>" class="form-control" />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Gender</td>
+                                    <td>
+                                        <label for="status_male" class="normal mr15">
+                                            <input type="radio" id="status_male" name="sex" value="male" <?php echo ($user->user_metum->sex=='male')?"checked":"" ?> /> Male
+                                        </label>
+                                        <label for="status_female" class="normal">
+                                            <input type="radio" id="status_female" name="sex" value="female" <?php echo ($user->user_metum->sex=='female')?"checked":"" ?> /> Female
+                                        </label>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Join date</td>
                                     <td><?php echo date('d/m/Y', strtotime($user->user_metum->created_date)); ?></td>
                                 </tr>
                                 <tr>
-                                    <td>Lần truy cập cuối</td>
+                                    <td>Last login</td>
                                     <td><?php
                                     if(empty($user->log_login)){
-                                        echo __('Chưa đăng nhập lần nào');
+                                        echo __('Not logged in yet');
                                     } else {
                                         echo date('d/m/Y H:i:s', strtotime($user->log_login[0]->login_date));
                                     }
                                     ?></td>
                                 </tr>
-                                <tr>
+<!--                                <tr>
                                     <td>Xác minh CMND</td>
                                     <td>
                                         <?php
                                         if($user->user_metum->passport_confirmed == 1){
-                                            echo __('<span class="label label-success">Đã xác minh</span>');
+                                            echo __('<span class="label label-success">Verified</span>');
                                         } else {
-                                            echo __('<span class="label label-danger">Chưa xác minh</span>');
+                                            echo __('<span class="label label-danger">Not verified</span>');
                                         }
                                         ?>
                                     </td>
@@ -61,9 +78,9 @@
                                     <td>
                                         <?php
                                         if($user->user_metum->phone_confirmed == 1){
-                                            echo __('<span class="label label-success">Đã xác minh</span>');
+                                            echo __('<span class="label label-success">Verified</span>');
                                         } else {
-                                            echo __('<span class="label label-danger">Chưa xác minh</span>');
+                                            echo __('<span class="label label-danger">Not verified</span>');
                                         }
                                         ?>
                                     </td>
@@ -73,20 +90,20 @@
                                     <td>
                                         <?php
                                         if($user->email_confirmed == 1){
-                                            echo __('<span class="label label-success">Đã xác minh</span>');
+                                            echo __('<span class="label label-success">Verified</span>');
                                         } else {
-                                            echo __('<span class="label label-danger">Chưa xác minh</span>');
+                                            echo __('<span class="label label-danger">Not verified</span>');
                                         }
                                         ?>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>Facebook</td>
-                                    <td><?=__('Chưa kết nối')?></td>
-                                </tr>
+                                    <td><?=__('Not connected')?></td>
+                                </tr>-->
                                 <tr>
                                     <td class="text-center" colspan="2">
-                                        <button type="button" class="btn-save btn btn-primary">Lưu thay đổi</button>
+                                        <button type="submit" class="btn-save btn btn-primary">Save changes</button>
                                     </td>
                                 </tr>
                             </tbody>

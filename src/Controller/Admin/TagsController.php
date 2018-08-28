@@ -65,6 +65,8 @@ class TagsController extends AdminsController {
                 $tag->slug = $slug;
                 $tag->description = $this->request->data('description');
                 $tag->image = $this->request->data('image');
+                $tag->created_date = date('Y-m-d H:i:s');
+                $tag->updated_date = date('Y-m-d H:i:s');
                 $savedTag = $this->Tags->save($tag);
                 if ($savedTag) {
                     $this->Flash->success(__('Thêm thẻ mới thành công!'));

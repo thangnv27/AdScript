@@ -44,7 +44,7 @@ $controller = strtolower($this->request->params['controller']);
             <div class="account pull-right">
                 <div class="username">
                     <a href="<?= $this->Url->build(['prefix' => 'admin', 'controller' => 'Users', 'action' => 'profile']) ?>">
-                        <span>01683589280</span>
+                        <span><?= $this->request->session()->read('Auth.User.username') ?> </span>
                         <i class="fa fa-caret-down"></i>
                     </a>
                 </div>
@@ -74,11 +74,6 @@ $controller = strtolower($this->request->params['controller']);
                     <li class="<?php echo (strpos($controller, "admin") !== false)?"actived":"" ?>">
                         <a href="<?= $this->Url->build(['prefix' => false, 'controller' => 'Admins', 'action' => 'display', 'index']) ?>">
                             <i class="fa fa-eye"></i> <?= __('Tổng quan') ?>
-                        </a>
-                    </li>
-                    <li class="<?php echo (strpos($controller, "transaction") !== false)?"actived":"" ?>">
-                        <a href="<?= $this->Url->build(['prefix' => 'admin', 'controller' => 'Transactions', 'action' => 'index']) ?>">
-                            <i class="fa fa-exchange"></i> <?php echo __('Giao dịch') ?>
                         </a>
                     </li>
                     <li class="menu-parent <?php echo (strpos($controller, "user") !== false)?"actived":"" ?>">
@@ -137,11 +132,11 @@ $controller = strtolower($this->request->params['controller']);
                             <i class="fa fa-bank"></i> <?php echo __('Ngân hàng') ?>
                         </a>
                     </li>
-                    <li class="menu-parent <?php echo (strpos($controller, "setting") !== false)?"actived":"" ?>">
+<!--                    <li class="menu-parent <?php echo (strpos($controller, "setting") !== false)?"actived":"" ?>">
                         <a href="<?= $this->Url->build(['prefix' => 'admin', 'controller' => 'Settings', 'action' => 'index']) ?>">
                             <i class="fa fa-cog"></i> <?php echo __('Cài đặt') ?>
                         </a>
-                    </li>
+                    </li>-->
                 </ul>
             </div>
             <div class="menu-right pull-right">
@@ -167,7 +162,7 @@ $controller = strtolower($this->request->params['controller']);
     <!--BEGIN: FOOTER-->
     <div class="footer">
         <div class="container">
-            <span>&COPY; 2018. CMS được phát triển bởi <a href="//adscript.net/">AdScript</a></span>
+            <span>Copyright &COPY; 2018. CMS được phát triển bởi <a href="//adscript.net/">AdScript</a></span>
         </div>
     </div>
     <!--END: FOOTER-->

@@ -12,12 +12,6 @@
                     <table class="table table-bordered">
                         <tbody>
                             <tr>
-                                <td width="40%">Số giao dịch</td>
-                                <td>
-                                    <?php echo count($user->trades) ?>
-                                </td>
-                            </tr>
-                            <tr>
                                 <td>Ngày đăng ký</td>
                                 <td><?php echo date('d/m/Y', strtotime($user->user_metum->created_date)); ?></td>
                             </tr>

@@ -172,6 +172,7 @@ class UsersController extends AppController {
                             $log_login->user_id = $user->id;
                             $log_login->ip_address = $_SERVER['REMOTE_ADDR'];
                             $log_login->user_agent = $_SERVER['HTTP_USER_AGENT'];
+                            $log_login->login_date = date('Y-m-d H:i:s');
                             $log_login_table->save($log_login);
                         } else {
                             $msg .= "<p>" . __("Sai tài khoản hoặc mật khẩu!") . "</p>";
@@ -285,12 +286,7 @@ class UsersController extends AppController {
                     'LogLogin' => function($q) {
                             return $q->order('LogLogin.login_date DESC')->limit(1);
                         }
-//                    'LogLogin' => [
-//                        'sort' => ['LogLogin.login_date' => 'DESC'],
-//                        'limit' => 1,
-//                    ]
                 ])->first();
-//$this->Commons->preTag($user);
         
         // SEO
         $title = __('Hồ sơ của {0}', [$username]);
@@ -324,12 +320,118 @@ class UsersController extends AppController {
                 ])->first();
         }
         
+        if($this->request->is('post')){
+            $
+            
+            $user_meta_table = TableRegistry::get('user_meta');
+            $user_meta = $user_meta_table->get($user->id);
+            $user_meta->fullname = $this->request->data('fullname');
+            $user_meta->address = $this->request->data('address');
+            $user_meta->phone = $this->request->data('phone');
+            $user_meta->sex = $this->request->data('sex');
+            $user_meta->passport = $this->request->data('passport');
+            $user_meta->updated_date = date('Y-m-d H:i:s');
+            $savedUserMeta = $user_meta_table->save($user_meta);
+            if ($savedUserMeta) {
+                echo json_encode(array(
+                    'status' => 'success',
+                    'message' => __('Updated successfully!'),
+                ));
+            } else {
+                echo json_encode(array(
+                    'status' => 'error',
+                    'message' => __('Update profile failed!'),
+                ));
+            }
+            exit;
+        }
+        
         // SEO
         $title = __('Edit your profile');
         $meta_description = __('');
         $og_type = "article";
         $og_image = SITE_URL . '/img/frontend/logo.png';
         $og_url = SITE_URL . Router::url(['controller' => 'Users', 'action' => 'editProfile']);
+
+        $this->set('user', $user);
+        $this->set('title', $title);
+        $this->set('meta_description', $meta_description);
+        $this->set('og_type', $og_type);
+        $this->set('og_url', $og_url);
+        $this->set('og_image', $og_image);
+        $this->set('canonical', $og_url);
+    }
+    
+    /**
+     * Sửa hồ sơ thành viên
+     */
+    public function changePassword(){
+        $user = $this->Auth->user();
+        if($user){
+            $user = $this->Users->findById($user->id)
+                ->contain([
+                    'Wallets', 'UserMeta', 
+                    'Ads' => ['fields' => ['Ads.id', 'Ads.user_id']],
+                    'LogLogin' => function($q) {
+                            return $q->order('LogLogin.login_date DESC')->limit(1);
+                        }
+                ])->first();
+        }
+        
+        if($this->request->is('post')){
+            $old_pwd = $this->request->data('old_pwd');
+            $new_pwd = $this->request->data('new_pwd');
+            $new_pwd2 = $this->request->data('new_pwd2');
+            $status = "error";
+            $msg = "";
+
+            if (empty($old_pwd)) {
+                $msg .= "<p>" . __("Old password is required!") . "</p>";
+            } else if (empty($new_pwd)) {
+                $msg .= "<p>" . __("New password is required!") . "</p>";
+            } else if($old_pwd == $new_pwd){
+                $msg .= "<p>" . __("New passwords and Old passwords must be different!") . "</p>";
+            } else if (empty($new_pwd2)) {
+                $msg .= "<p>" . __("Retype New password is required!") . "</p>";
+            } else if ($new_pwd != $new_pwd2) {
+                $msg .= "<p>" . __("Retype Password was wrong!") . "</p>";
+            }
+            if (empty($msg)) {
+                $hash_password = $this->Commons->hash_password($old_pwd, $user->salt);
+                $user_check = $this->Users->find('all', array(
+                    'conditions' => array(
+                        'Users.username' => $user->username,
+                        'Users.password' => $hash_password
+                    )
+                ));
+                if ($user_check->count() == 1) {
+                    $new_password = $this->Commons->hash_password($new_pwd, $user->salt);
+                    $user = $user_check->first();
+                    $user->password = $new_password;
+                    $savedUserMeta = $this->Users->save($user);
+                    if ($savedUserMeta) {
+                        $status = "success";
+                        $msg .= "<p>" . __("Password changed successfully!") . "</p>";
+                    } else {
+                        $msg .= "<p>" . __("Change password failed!") . "</p>";
+                    }
+                } else {
+                    $msg .= "<p>" . __("Old Password was wrong!") . "</p>";
+                }
+            }
+            echo json_encode(array(
+                'status' => $status,
+                'message' => $msg,
+            ));
+            exit;
+        }
+        
+        // SEO
+        $title = __('Change Password');
+        $meta_description = __('');
+        $og_type = "article";
+        $og_image = SITE_URL . '/img/frontend/logo.png';
+        $og_url = SITE_URL . Router::url(['controller' => 'Users', 'action' => 'changePassword']);
 
         $this->set('user', $user);
         $this->set('title', $title);

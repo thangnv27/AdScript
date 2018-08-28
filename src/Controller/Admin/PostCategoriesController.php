@@ -57,6 +57,8 @@ class PostCategoriesController extends AdminsController {
                 $category->description = $this->request->data('description');
                 $category->image = $this->request->data('image');
                 $category->parent = intval($parent);
+                $category->created_date = date('Y-m-d H:i:s');
+                $category->updated_date = date('Y-m-d H:i:s');
                 $savedCategory = $this->PostCategories->save($category);
                 if ($savedCategory) {
                     $status = "success";

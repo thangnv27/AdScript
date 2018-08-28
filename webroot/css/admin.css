@@ -130,13 +130,13 @@ button.ajax-small{
     transition: 0.3s;
 }
 .header .account ul li a:hover{
-    background: #252774;
+    background: #337AB7;
     transition: 0.3s;
 }
 
 /*****************************************************************************/
 .menu-header{
-    background: #252774;
+    background: #337AB7;
     position: relative;
     width: 100%;
     top:0;
@@ -198,7 +198,7 @@ button.ajax-small{
     position: relative;
 }
 .menu-header .menu-left ul .menu-parent ul li:hover{
-    background: #252774;
+    background: #337AB7;
     transition: 0.3s;
 }
 .menu-header .menu-right{
@@ -399,8 +399,8 @@ button.ajax-small{
     padding: 10px 0 0;
 }
 .report-content-top .report-content-top1 .fa-usd{
-    background: #252774;
-    border: 1px solid #252774;
+    background: #337AB7;
+    border: 1px solid #337AB7;
 }
 .report-content-top .report-content-top1 .fa-reply-all{
     background: #F18E4C;
@@ -434,7 +434,7 @@ button.ajax-small{
     font-weight: bold;
 }
 .report-content-top .report-content-top1 .report1 .report1-2{
-    color: #252774;
+    color: #337AB7;
     font-size: 25px;
 }
 .report-content-top .report-content-top1 .report1 .report1-3{

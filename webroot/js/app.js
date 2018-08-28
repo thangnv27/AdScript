@@ -406,5 +406,67 @@ jQuery(document).ready(function ($) {
             openDialogLogin();
         }
     });
+    
+    // Chinh sua ho so
+    jQuery("#frmEditProfile").submit(function(){
+        if(is_auth){
+            var _form = this;
+            var _action = jQuery(this).attr('action');
+            toastr.options.closeButton = true;
+            toastr.options.positionClass = "toast-top-center";
+            jQuery("#frmEditProfile .btn-save").attr('disabled', 'disabled').button('loading');
+            jQuery.ajax({
+                url: _action, type: "POST", dataType: "json", cache: false,
+                data: jQuery(_form).serialize(),
+                success: function(response, textStatus, XMLHttpRequest){
+                    if(response && response.status === 'success'){
+                        toastr.success(response.message, '', {timeOut: 5000});
+                    }else if(response.status === 'error'){
+                        toastr.error(response.message, '', {timeOut: 5000});
+                    }
+                },
+                error: function(MLHttpRequest, textStatus, errorThrown){
+                    toastr.error(errorThrown, '', {timeOut: 5000});
+                },
+                complete:function(){
+                    jQuery("#frmEditProfile .btn-save").removeAttr('disabled').button('reset');
+                }
+            });
+        } else {
+            openDialogLogin();
+        }
+        return false;
+    });
+    
+    // Thay doi mat khau
+    jQuery("#frmChangePassword").submit(function(){
+        if(is_auth){
+            var _form = this;
+            var _action = jQuery(this).attr('action');
+            toastr.options.closeButton = true;
+            toastr.options.positionClass = "toast-top-center";
+            jQuery("#frmChangePassword .btn-save").attr('disabled', 'disabled').button('loading');
+            jQuery.ajax({
+                url: _action, type: "POST", dataType: "json", cache: false,
+                data: jQuery(_form).serialize(),
+                success: function(response, textStatus, XMLHttpRequest){
+                    if(response && response.status === 'success'){
+                        toastr.success(response.message, '', {timeOut: 5000});
+                    }else if(response.status === 'error'){
+                        toastr.error(response.message, '', {timeOut: 5000});
+                    }
+                },
+                error: function(MLHttpRequest, textStatus, errorThrown){
+                    toastr.error(errorThrown, '', {timeOut: 5000});
+                },
+                complete:function(){
+                    jQuery("#frmChangePassword .btn-save").removeAttr('disabled').button('reset');
+                }
+            });
+        } else {
+            openDialogLogin();
+        }
+        return false;
+    });
 
 });

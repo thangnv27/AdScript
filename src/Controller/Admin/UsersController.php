@@ -74,6 +74,14 @@ class UsersController extends AdminsController {
                         if ($user) {
                             $this->Auth->setUser($user);
                             $status = "success";
+                            
+                            $log_login_table = TableRegistry::get('log_login');
+                            $log_login = $log_login_table->newEntity();
+                            $log_login->user_id = $user->id;
+                            $log_login->ip_address = $_SERVER['REMOTE_ADDR'];
+                            $log_login->user_agent = $_SERVER['HTTP_USER_AGENT'];
+                            $log_login->login_date = date('Y-m-d H:i:s');
+                            $log_login_table->save($log_login);
                         } else {
                             $msg .= "<p>" . __("Sai tài khoản hoặc mật khẩu!") . "</p>";
                         }
@@ -243,6 +251,8 @@ class UsersController extends AdminsController {
                     $user_meta_data->phone = $phone;
                     $user_meta_data->sex = $this->request->data('sex');
                     $user_meta_data->passport = $this->request->data('passport');
+                    $user_meta_data->created_date = date('Y-m-d H:i:s');
+                    $user_meta_data->updated_date = date('Y-m-d H:i:s');
                     $user_meta = $user_meta_table->save($user_meta_data);
                     
                     // Add wallet for user

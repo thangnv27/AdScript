@@ -21,6 +21,7 @@
                             <tr id="ad_<?=$ad->id?>">
                                 <td>
                                     <p><?=$ad->title?></p>
+                                    <p>Size: <?=$ad->width?>x<?=$ad->height?> px</p>
                                     <div class="actions" data-id="<?=$ad->id?>">
                                         <a href="<?= $this->Url->build(['controller' => 'Banners', 'action' => 'preview', $ad->id]) ?>" class="btn btn-info" target="_blank">
                                             <i class="fa fa-eye" aria-hidden="true"></i> Pewview

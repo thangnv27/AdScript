@@ -126,6 +126,8 @@ class PostsController extends AdminsController {
                 $post->status = $status;
                 $post->sticky = $sticky;
                 $post->user_id = $user->id;
+                $post->created_date = date('Y-m-d H:i:s');
+                $post->updated_date = date('Y-m-d H:i:s');
                 $savedPost = $this->Posts->save($post);
                 if ($savedPost) {
                     $this->Flash->success(__('Thêm bài viết mới thành công!'));
@@ -326,6 +328,8 @@ class PostsController extends AdminsController {
         $new_post->status = 'draft';
         $new_post->sticky = 0;
         $new_post->user_id = $user->id;
+        $new_post->created_date = date('Y-m-d H:i:s');
+        $new_post->updated_date = date('Y-m-d H:i:s');
         $savedPost = $this->Posts->save($new_post);
         if ($savedPost) {
             $this->Flash->success(__('Nhân bản thành công!'));

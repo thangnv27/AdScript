@@ -68,6 +68,8 @@ class PagesController extends AdminsController {
                 $page->excerpt = $this->request->data('excerpt');
                 $page->image = $this->request->data('image');
                 $page->status = $status;
+                $page->created_date = date('Y-m-d H:i:s');
+                $page->updated_date = date('Y-m-d H:i:s');
                 $savedPage = $this->Pages->save($page);
                 if ($savedPage) {
                     $this->Flash->success(__('Thêm trang mới thành công!'));
@@ -154,6 +156,8 @@ class PagesController extends AdminsController {
         $new_page->excerpt = $page->excerpt;
         $new_page->image = $page->image;
         $new_page->status = 'draft';
+        $new_page->created_date = date('Y-m-d H:i:s');
+        $new_page->updated_date = date('Y-m-d H:i:s');
         $savedPage = $this->Pages->save($new_page);
         if ($savedPage) {
             $this->Flash->success(__('Nhân bản thành công!'));
